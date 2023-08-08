@@ -1,6 +1,7 @@
 import {Component} from "react";
 import CardList from "../Components/CardList";
 import './App.css'
+import ErrorBoundry from "../Components/ErrorBoundry";
 import SearchBox from "../Components/SearchBox";
 import Scroll from "../Components/Scroll";
 
@@ -34,18 +35,19 @@ class App extends Component {
 
         // this is same as if() else{}
         return robots.length === 0 ?
-             <h1>Loading</h1> :
+            <h1>Loading</h1> :
 
             (
                 <div className='tc'>
                     <h1 className='f1'>RoboFriends</h1>
-                        <SearchBox searchChange={this.OnSearchChange}/>
+                    <SearchBox searchChange={this.OnSearchChange}/>
                     <Scroll>
-                        <CardList robots={filteredRobots}/>
+                        <ErrorBoundry>
+                            <CardList robots={filteredRobots}/>
+                        </ErrorBoundry>
                     </Scroll>
                 </div>
             )
-
 
 
     }
